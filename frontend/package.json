@@ -1,0 +1,52 @@
+{
+  "name": "chat-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.5",
+    "@types/fast-levenshtein": "^0.0.2",
+    "@types/js-cookie": "^3.0.3",
+    "@types/lodash": "^4.14.198",
+    "@types/react-avatar-editor": "^13.0.0",
+    "antd": "^5.9.4",
+    "axios": "^1.4.0",
+    "emoji-picker-react": "^4.5.2",
+    "fast-levenshtein": "^3.0.0",
+    "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-avatar-editor": "^13.0.0",
+    "react-cropper": "^2.3.3",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
+    "react-image-crop": "^10.1.8",
+    "react-router-dom": "^6.14.2",
+    "sass": "^1.64.2",
+    "socket.io-client": "^4.7.2",
+    "use-debounce": "^9.0.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.15",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.28",
+    "prettier": "^3.0.2",
+    "prettier-plugin-tailwindcss": "^0.5.3",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
+}

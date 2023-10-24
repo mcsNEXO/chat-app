@@ -1,0 +1,59 @@
+.container-sign-up {
+  min-height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .box {
+    width: 500px;
+    height: 600px;
+    padding: 1.5rem 1rem;
+    border-radius: 14px;
+    background-color: rgb(41, 40, 40);
+    .title {
+      width: 100%;
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    form {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 5rem;
+      margin: 5rem auto 0 auto;
+      input {
+        height: 40px;
+        padding: 0px 10px;
+        border-radius: 10px;
+        background-color: rgb(49, 48, 48);
+        border: 1px solid rgb(88, 84, 84);
+        outline: none;
+        font-size: 1rem;
+        margin-top: 1.2rem;
+      }
+      input:focus {
+        border: 1px solid rgb(145, 149, 152);
+      }
+      input::placeholder {
+        color: rgb(139, 139, 139);
+        font-size: 1rem;
+      }
+      button {
+        width: 80%;
+        height: 35px;
+        margin: 2rem auto 0rem auto;
+        border-radius: 12px;
+        border: 1px solid #1567da;
+        background-color: #1677ff;
+        font-size: 1rem;
+        outline: none;
+        cursor: pointer;
+      }
+      .error {
+        color: rgb(209, 39, 39);
+        padding-left: 4px;
+      }
+    }
+  }
+}
