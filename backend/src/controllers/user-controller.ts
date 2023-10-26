@@ -273,7 +273,6 @@ export const editPassword = async (
         .json("Current password is the same what new password");
     const user = get(req, "identity") as UserType;
     if (!user) return res.status(400).json("User is not exist");
-    console.log("user", user);
     const updatedUser = await UserModel.findByIdAndUpdate(
       user._id,
       {
@@ -281,7 +280,6 @@ export const editPassword = async (
       },
       { new: true }
     );
-    console.log("up", updatedUser);
     return res.status(200).json(updatedUser);
   } catch (error) {
     return res.status(500).json(error);

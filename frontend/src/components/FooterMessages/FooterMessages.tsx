@@ -40,8 +40,8 @@ function FooterMessages({
   const [imageUrl, setImageUrl] = React.useState<string>("");
   const [isActiveEmoji, setIsActiveEmoji] = React.useState<boolean>(false);
 
-  const imageRef: React.LegacyRef<any> = React.useRef();
-  const inputMess: React.LegacyRef<any> = React.useRef();
+  const imageRef = React.useRef<HTMLInputElement | null>(null);
+  const inputMess = React.useRef<HTMLInputElement | null>(null);
 
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -58,12 +58,13 @@ function FooterMessages({
   };
 
   const clearImage = () => {
+    if (!imageRef.current) return;
     setImageUrl("");
     setImageToSend(null);
     imageRef.current.value = "";
   };
 
-  const openInputImage = () => imageRef.current.click();
+  const openInputImage = () => imageRef?.current?.click();
 
   return (
     <form
@@ -72,11 +73,11 @@ function FooterMessages({
         replyMessage ? "end" : "center"
       }`}
     >
-      {/* <button type="button" onClick={() => console.log(imageUrl)}>
+      {/* <button type="button" >
         <LinkOutlined className="text-xl" />
       </button> */}
-      <button onClick={openInputImage} type="button">
-        <PictureOutlined className="text-xl" />
+      <button onClick={openInputImage} type="button" className="rounded-full ">
+        <PictureOutlined className="text-xl p-1" />
         <input
           type="file"
           accept="image/png, image/jpeg"
@@ -106,7 +107,7 @@ function FooterMessages({
               </div>
             </div>
             <button
-              className="justify-self-end w-6 text-2xl"
+              className="justify-self-end w-6 text-2xl rounded-full"
               onClick={clearReplyMessage}
             >
               <BsXLg />
@@ -138,9 +139,10 @@ function FooterMessages({
         />
         <button
           type="button"
-          className="absolute bottom-1 right-3 flex items-center justify-center "
+          style={{ bottom: 6 }}
+          className="absolute right-2 flex items-center justify-center rounded-full p-1"
         >
-          <AudioOutlined className="text-lg" style={{ paddingBottom: 6 }} />
+          <AudioOutlined className="text-lg" />
         </button>
         <div
           onPointerEnter={() => setIsActiveEmoji(true)}
@@ -150,25 +152,25 @@ function FooterMessages({
         >
           <div className="relative">
             {isActiveEmoji ? (
-              <div className="absolute bottom-0 -left-2 z-10">
+              <div className="  absolute bottom-0 -left-2 z-10">
                 <EmojiPicker
                   theme={Theme.DARK}
                   width={400}
                   searchDisabled={true}
                   height={300}
                   onEmojiClick={(ev) =>
-                    handleMessageInput(inputMess.current.value + ev.emoji)
+                    handleMessageInput(inputMess?.current?.value + ev.emoji)
                   }
                 />
               </div>
             ) : null}
           </div>
-          <BsEmojiSmile className="text-xl" />
+          <BsEmojiSmile className="text-xl cursor-pointer" />
         </div>
       </div>
 
-      <button type="submit">
-        <SendOutlined className="text-xl" />
+      <button type="submit" className="rounded-full">
+        <SendOutlined className="text-xl p-1" />
       </button>
     </form>
   );

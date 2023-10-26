@@ -23,7 +23,11 @@ export class ApiClient {
       const accessToken = Cookies.get("accessToken");
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
-      } else if (config.url !== "auth/login" && !accessToken) {
+      } else if (
+        config.url !== "auth/login" &&
+        config.url !== "auth/register" &&
+        !accessToken
+      ) {
         try {
           const controller = new AbortController();
           const response = await axios.request({

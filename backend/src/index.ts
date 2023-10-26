@@ -50,11 +50,12 @@ server.listen(PORT, () => console.log(`Server is listening on PORT: ${PORT}`));
 let onlineUsers: OnlineUsersType[] = [];
 io.on("connection", (socket) => {
   socket.on("addNewUser", (userId) => {
-    !onlineUsers.some((user: any) => user.userId === userId) &&
+    !onlineUsers.some((user) => user.userId === userId) &&
       onlineUsers.push({
         userId,
         socketId: socket.id,
       });
+    console.log(onlineUsers);
     io.emit("getOnlineUsers", onlineUsers);
   });
 

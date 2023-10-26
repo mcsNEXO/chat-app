@@ -42,10 +42,10 @@ function Messages({
   const [messageInput, setMessageInput] = React.useState<string>("");
   const [searchTermMessage, setSearchTermMessage] = React.useState<{
     text: string;
-    isActive: boolean;
+    isActive: string;
   }>({
     text: "",
-    isActive: false,
+    isActive: "",
   });
   const [prevScrollHeight, setPrevScrollHeight] = useState<number>(0);
   const [currentIndex, setCurrenIndex] = useState<number>(-1);
@@ -62,7 +62,7 @@ function Messages({
   const { auth } = useAuth();
 
   //ref
-  const scroll = React.useRef<HTMLDivElement>(null as any);
+  const scroll = React.useRef<HTMLDivElement | null>(null);
 
   const shouldDisplayDate = (currentMessage: MessageType, index: number) => {
     if (index === 0) return true;
@@ -99,7 +99,7 @@ function Messages({
       );
       if (success.success && scroll.current) {
         setTimeout(() => {
-          scroll.current.scroll({
+          scroll?.current?.scroll({
             top: scroll.current.scrollHeight,
             behavior: scroll.current.scrollTop > 785 ? "smooth" : "instant",
           });
@@ -118,11 +118,11 @@ function Messages({
       method: "get",
       url: `message/findMessages?chatId=${activeChat?._id}&term=${searchTermMessage.text}`,
     });
-    const data = res.data as any;
+    const data: any = res.data;
 
-    setSearchedMessages(data.findedMessages);
+    setSearchedMessages(data.findedMessages as MessageType[]);
     setSearchTermMessage((prev) => {
-      return { ...prev, isActive: true };
+      return { ...prev, isActive: prev.text };
     });
   };
 
@@ -153,7 +153,8 @@ function Messages({
       if (
         scroll.current.scrollTop === 0 &&
         !messagesLoading &&
-        firstMessageDate !== messages[0]?.createdAt
+        firstMessageDate !== messages[0]?.createdAt &&
+        firstMessageDate
       ) {
         handlePage();
       }
@@ -179,13 +180,13 @@ function Messages({
     const mapImages = messages
       .filter((x) => x.image !== null)
       .map((x) => `message_images/${x.image!}`);
-    console.log(mapImages.length, images.length);
     if (mapImages.length > images.length) {
       setImages(mapImages);
       setCurrentIndexImg(mapImages.length - 1);
     }
   }, [messages, activeChat]);
   React.useEffect(() => {
+    if (!scroll.current) return;
     scroll.current.scrollTop = scroll.current.scrollHeight - prevScrollHeight;
     setPrevScrollHeight(scroll.current.scrollHeight);
   }, [page]);
@@ -193,7 +194,6 @@ function Messages({
   const handleDeleteChat = async () => {
     deleteChat();
     setIsActiveOption(false);
-    // window.location.reload();
   };
 
   const deleteOne = async (messageId: string) => {
@@ -206,7 +206,7 @@ function Messages({
 
   const getCurrentScrollTop = (index: number) => {
     const placeElement = index * 80;
-    const diff = placeElement - scroll.current.scrollTop;
+    const diff = placeElement - scroll.current!.scrollTop;
     return diff > 0 ? "top" : "bottom";
   };
 
@@ -215,11 +215,12 @@ function Messages({
   };
 
   const offSearchMessage = () => {
-    setSearchTermMessage({ isActive: false, text: "" });
+    setSearchTermMessage({ isActive: "", text: "" });
   };
 
   const hideOption = () => {
     setIsActiveOption(false);
+    setIsActiveMessOption(-1);
   };
 
   const getMoreImages = async () => {
@@ -230,25 +231,22 @@ function Messages({
       });
       const data = res.data as string[];
       setImages(data);
-      console.log(data);
     } catch (error) {}
   };
   React.useEffect(() => {
-    // console.log(maxNumber);
-    // if(currentIndexImg < )
     getMoreImages();
   }, []);
 
   return (
     <>
-      {isActiveOption ? (
+      {isActiveOption || isActiveMessOption > -1 ? (
         <div
           className="absolute top-0 left-0 w-screen h-screen z-10"
           onClick={hideOption}
         ></div>
       ) : null}
 
-      <section className="h-full w-full gap-4 flex flex-col border border-neutral-600 rounded-xl p-5 overflow-hidden relative">
+      <section className="h-full w-full gap-4 flex flex-col border border-neutral-600 rounded-xl p-5 overflow-hidden relative ">
         {activeChat ? (
           <>
             <MessagesHeader
@@ -271,7 +269,7 @@ function Messages({
             />
 
             <div
-              className="flex-grow flex-col custom-scrollbar relative overflow-y-auto"
+              className={`flex-grow flex-col custom-scrollbar relative overflow-y-scroll`}
               onScroll={handleScroll}
               ref={scroll}
             >
@@ -327,5 +325,5 @@ function Messages({
     </>
   );
 }
-
-export default Messages;
+const MemoizedMessages = React.memo(Messages);
+export default MemoizedMessages;

@@ -2,6 +2,9 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      sc: "950px",
+    },
     extend: {
       height: {
         "app-height": "var(--app-height)",

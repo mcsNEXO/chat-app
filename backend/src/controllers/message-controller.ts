@@ -171,7 +171,6 @@ export const getMoreImages = async (
 ) => {
   try {
     const { chatId, limit } = req.params;
-    console.log(limit);
     const images = (
       await MessageModel.find({ chatId, image: { $ne: null } })
         .sort({ createdAt: -1 })

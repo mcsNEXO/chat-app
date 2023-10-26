@@ -30,7 +30,7 @@ function UserChat({
     <div
       className={`flex justify-between mt-1 gap-3 h-20 p-3 rounded-xl ${
         activeChat?._id === chat?._id ? "bg-active-gray" : "bg-dark-gray"
-      }  `}
+      }  max-[950px]:justify-center`}
       onClick={() => {
         handleActiveChat(chat, recipientUser, activeChat);
       }}
@@ -54,7 +54,7 @@ function UserChat({
           </div>
         )}
       </div>
-      <div className="max-w-2/4 overflow-hidden ">
+      <div className="max-w-2/4 overflow-hidden  max-[950px]:hidden ">
         <div className="font-bold block overflow-hidden">
           <div className="truncate">
             {recipientUser?.firstName} {recipientUser?.lastName}
@@ -64,7 +64,7 @@ function UserChat({
           {data.lastMessage}
         </div>
       </div>
-      <div className="w-1/6 h-full text-sm text-center flex flex-col justify-between items-center">
+      <div className="w-1/6 h-full text-sm text-center flex flex-col justify-between items-center  max-[950px]:hidden">
         <span className="max-w-full">{data.lastMessageDate}</span>
         {data.unReadMessageCount > 0 ? (
           <span className="bg-red-600 w-6 h-6 pb-0.5 rounded-full flex justify-center items-center">

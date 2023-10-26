@@ -9,7 +9,7 @@ interface ISearchInput {
   type: string;
   searchMessageTerm?: {
     text: string;
-    isActive: boolean;
+    isActive: string;
   };
   handleSearchChatTerm?: (term: string) => void;
   handleSearchMessages?: (term: string) => void;
@@ -31,10 +31,14 @@ function SearchInput({
   return (
     <div
       className={`relative ${
-        isActive ? "w-0 mr-0" : "w-full mr-3"
-      } h-${height}  custom-transition z-1 ${
         type === "messages" ? "visible" : "overflow-hidden"
-      }`}
+      } ${
+        isActive
+          ? "w-0 mr-0 max-[950px]:h-0"
+          : `${
+              type === "messages" ? "w-fit" : "w-full max-[950px]:h-auto pl-2"
+            } mr-3`
+      } h-${height}  custom-transition z-1 `}
     >
       <input
         type="text"
@@ -44,15 +48,18 @@ function SearchInput({
             ? handleSearchChatTerm && handleSearchChatTerm(e.target.value)
             : onChange && onChange(e.target.value)
         }
-        id=""
+        id={`search-${type}`}
+        style={{ maxWidth: type === "messages" ? 200 : "" }}
         placeholder="Search"
-        className="h-full pr-9 border text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full pl-2 p-2.5 bg-neutral-800 border-neutral-600 placeholder-gray-400 text-white outline-none"
+        className={`h-full pr-9 ${
+          searchMessageTerm?.isActive ? "pr-16" : ""
+        } border text-sm rounded-lg focus:ring-gray-400 focus:border-gray-400 block w-full pl-2 p-2.5 bg-neutral-800 border-neutral-600 placeholder-gray-400 text-white outline-none`}
         required
       />
       <div className="absolute inset-y-0 right-0 flex pr-2 gap-1 items-center">
         <button
           type="button"
-          className=" flex items-center "
+          className=" flex items-center rounded-full p-1"
           onClick={() =>
             type === "messages" &&
             handleSearchMessages &&

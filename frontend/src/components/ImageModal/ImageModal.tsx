@@ -21,11 +21,10 @@ function ImageModal({
   handleCloseModal,
   handleDeleteUserImage,
 }: ImageModal) {
-  const fileRef: React.LegacyRef<any> = React.useRef();
-  const imageRef = React.useRef<any>();
+  const fileRef = React.useRef<HTMLInputElement | null>(null);
 
   const handleOpenInputFile = () => {
-    fileRef.current.click();
+    fileRef?.current?.click();
   };
 
   return (

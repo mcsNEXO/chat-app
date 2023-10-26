@@ -116,7 +116,6 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     });
 
     socket.on("getDeletedChat", (res) => {
-      console.log(res.deletedChat._id);
       setUserChats((prev) => prev.filter((x) => x._id !== res.deletedChat._id));
       setActiveChat(null);
     });
@@ -252,7 +251,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
         date: null | string;
         message?: string;
       };
-      if (firstMessDate.date === null) return;
+      if (firstMessDate.date === null) return setFirstMessageDate("");
       if (firstMessDate) setFirstMessageDate(firstMessDate.date);
     } catch (error) {
       throw new Error(error as any);

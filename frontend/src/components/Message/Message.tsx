@@ -25,7 +25,7 @@ interface IMessage {
   message: MessageType;
   searchTermMessage: {
     text: string;
-    isActive: boolean;
+    isActive: string;
   };
   currentIndexImg: number;
   searchedMessages: MessageType[];
@@ -113,7 +113,6 @@ function Message({
       </div>
     </div>
   );
-
   return (
     <div>
       {displayDate}
@@ -123,7 +122,9 @@ function Message({
         } h-auto p-2 group hover:visible`}
       >
         <div
-          style={{ minHeight: message.repliedTo && !message?.deleted ? 96 : 0 }}
+          style={{
+            minHeight: message.repliedTo && !message?.deleted ? 96 : 0,
+          }}
           className={`w-1/3 relative flex items-${
             message?.repliedTo ? "end" : "center"
           } ${isSender ? "justify-end" : "justify-start"}`}
@@ -146,7 +147,7 @@ function Message({
                   ? "text-neutral-400"
                   : searchTermMessage.isActive &&
                     searchedMessages.length > 0 &&
-                    message.text === searchTermMessage.text
+                    message.text === searchTermMessage.isActive
                   ? "bg-yellow-400"
                   : ""
               }`}
@@ -190,8 +191,6 @@ function Message({
                         preview={{
                           className: "bg-opacity-40 bg-black",
                           current: currentIndexImg,
-                          onTransform: () => console.log("k"),
-
                           toolbarRender: (
                             _,
                             {
