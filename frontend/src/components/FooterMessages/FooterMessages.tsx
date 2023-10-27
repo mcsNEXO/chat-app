@@ -4,7 +4,7 @@ import {
   SendOutlined,
 } from "@ant-design/icons";
 import React from "react";
-import { MessageType, UserType } from "../../types/userTypes";
+import { MessageType, UserType } from "../../types/types";
 import { BsEmojiSmile, BsFillReplyFill, BsXLg } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthContext";

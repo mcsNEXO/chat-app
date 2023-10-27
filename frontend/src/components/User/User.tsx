@@ -1,10 +1,5 @@
-import React from "react";
-import { ChatType, UserType } from "../../types/userTypes";
-import {
-  TeamOutlined,
-  UserAddOutlined,
-  UserDeleteOutlined,
-} from "@ant-design/icons";
+import { ChatType, UserType } from "../../types/types";
+import { TeamOutlined, UserAddOutlined } from "@ant-design/icons";
 
 interface IUser {
   user: UserType;

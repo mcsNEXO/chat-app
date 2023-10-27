@@ -20,7 +20,7 @@ interface FormFields {
 }
 type FormFieldType = keyof FormFields;
 const SignUp = () => {
-  const { message, notification, modal } = App.useApp();
+  const { message } = App.useApp();
   const [error, setError] = useState<string>("");
   const [form, setForm] = useState<FormFields>({
     email: {

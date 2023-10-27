@@ -6,7 +6,7 @@ import {
   MessageType,
   OnlineUsersType,
   UserType,
-} from "../types/userTypes";
+} from "../types/types";
 import { Socket, io } from "socket.io-client";
 import { App } from "antd";
 

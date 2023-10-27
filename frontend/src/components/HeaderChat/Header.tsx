@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { apiClient } from "../../axios";
 import ImageModal from "../ImageModal/ImageModal";
-import { UserType } from "../../types/userTypes";
+import { UserType } from "../../types/types";
 
 function Header() {
   //states

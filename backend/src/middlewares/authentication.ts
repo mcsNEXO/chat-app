@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../../config";
 import { UserModel } from "../db/models/user";
 import { accessTokenType } from "../types/accessTokenType";
-import { merge, get } from "lodash";
+import { merge } from "lodash";
 
 export const isAuthenticated = async (
   req: express.Request,

@@ -1,23 +1,17 @@
 import React from "react";
-import { useAuth } from "../../contexts/AuthContext";
 import { UserAddOutlined } from "@ant-design/icons";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import Messages from "../../components/Messages/Messages";
 import UserChat from "../../components/UserChat/UserChat";
 import { useChatList } from "../../contexts/ChatContext";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import { ChatType, UserType } from "../../types/userTypes";
+import { UserType } from "../../types/types";
 import { apiClient } from "../../axios";
 import { useDebounce } from "use-debounce";
 import User from "../../components/User/User";
-import {
-  IoMdPersonAdd,
-  IoMdPeople,
-  IoMdInformationCircleOutline,
-} from "react-icons/io";
+import { IoMdPersonAdd, IoMdInformationCircleOutline } from "react-icons/io";
 import DrawerComponent from "../../components/Drawer/Drawer";
 import "react-image-crop/src/ReactCrop.scss";
-import ReactCrop, { Crop } from "react-image-crop";
 import pickChat from "../../assets/pick_chat.svg";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
@@ -87,7 +81,7 @@ export const ChatPage = () => {
         isActiveDrawer={isActiveDrawer}
         closeDrawer={() => setIsActiveDrawer(false)}
       />
-      <main className="flex h-app-height p-8 gap-x-6 bg-neutral-900  max-[950px]:p-1 overflow-x-hidden gap-x-2 ">
+      <main className="flex h-app-height p-8 gap-x-6 bg-neutral-900  max-[950px]:p-1 overflow-x-hidden max-[950px]:gap-x-2 ">
         {isActive ? (
           <div className="hidden max-[950px]:flex">
             <div className="max-[950px]:w-32"></div>

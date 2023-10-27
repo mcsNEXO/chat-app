@@ -11,7 +11,7 @@ import { App } from "antd";
 export const Main = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { message, notification, modal } = App.useApp();
+  const { message } = App.useApp();
 
   const { setAuth } = useAuth();
 

@@ -1,6 +1,5 @@
-import React from "react";
 import { useFetchRecipient } from "../../hooks/useFetchRecipient";
-import { ChatType, OnlineUsersType, UserType } from "../../types/userTypes";
+import { ChatType, OnlineUsersType, UserType } from "../../types/types";
 import { searchUsersByText } from "../../helpers/searchUserByText";
 
 function UserChat({

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChatType, MessageType, UserType } from "../../types/userTypes";
+import { ChatType, MessageType, UserType } from "../../types/types";
 import { useAuth } from "../../contexts/AuthContext";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { apiClient } from "../../axios";

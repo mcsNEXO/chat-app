@@ -8,7 +8,7 @@ import {
   SearchOutlined,
   UpOutlined,
 } from "@ant-design/icons";
-import { UserType } from "../../types/userTypes";
+import { UserType } from "../../types/types";
 import React from "react";
 import { BsXLg } from "react-icons/bs";
 

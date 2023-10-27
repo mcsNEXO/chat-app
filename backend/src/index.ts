@@ -4,17 +4,12 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
-import { PORT, DATABASE, JWT_SECRET } from "../config";
-import mongoose, { connect, disconnect } from "mongoose";
+import { PORT, DATABASE } from "../config";
+import mongoose from "mongoose";
 import router from "./router/router";
-import * as WebSockets from "ws";
 import { WebSocket } from "ws";
-import jwt, { decode } from "jsonwebtoken";
-import { merge } from "lodash";
-import { accessTokenType } from "types/accessTokenType";
 import { Server } from "socket.io";
 import { OnlineUsersType } from "types/chatTypes";
-import { MessageModel } from "./db/models/message";
 
 declare class MyWebSocket extends WebSocket {
   userId: string;
@@ -22,8 +17,6 @@ declare class MyWebSocket extends WebSocket {
 
 const app = express();
 const server = http.createServer(app);
-// const wss: WebSockets.Server<typeof MyWebSocket, typeof http.IncomingMessage> =
-// new WebSockets.Server({ server });
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",

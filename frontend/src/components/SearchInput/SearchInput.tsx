@@ -1,5 +1,4 @@
 import { SearchOutlined } from "@ant-design/icons";
-import React from "react";
 import { BsXLg } from "react-icons/bs";
 
 interface ISearchInput {

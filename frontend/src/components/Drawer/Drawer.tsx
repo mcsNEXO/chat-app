@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Drawer } from "antd";
 import { AiOutlineClose } from "react-icons/ai";
-import { FiEdit, FiEdit3, FiLogOut } from "react-icons/fi";
+import { FiEdit3, FiLogOut } from "react-icons/fi";
 import EditDrawer from "./EditDrawer";
 
 interface IDrawerComponent {
@@ -13,7 +13,7 @@ interface IDrawerComponent {
 function DrawerComponent({ isActiveDrawer, closeDrawer }: IDrawerComponent) {
   const [isActiveEdit, setIsActiveEdit] = React.useState<boolean>(false);
   const [flag, setFlag] = React.useState(false);
-  const { auth, setAuth, logout } = useAuth();
+  const { auth, logout } = useAuth();
 
   React.useEffect(() => {
     if (!isActiveEdit)

@@ -1,6 +1,7 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { apiClient } from "../axios";
+import { App } from "antd";
 
 interface IAuthContext {
   auth: UserContext | null;
@@ -24,6 +25,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [auth, setAuthState] = React.useState<UserContext | null>(null);
+  const { message } = App.useApp();
 
   React.useEffect(() => {
     (async () => {
@@ -53,6 +55,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         method: "get",
         url: "auth/logout",
       });
+      if (res.status === 200) {
+        message.success("You have been loggout");
+      }
       location.reload();
     } catch (err) {
       console.log(err);

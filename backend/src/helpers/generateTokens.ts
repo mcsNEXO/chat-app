@@ -8,7 +8,6 @@ export function generateAccessToken(user: accessTokenType) {
   return jwt.sign(user, JWT_SECRET);
 }
 
-// Tworzenie tokenu odświeżania
 export function generateRefreshToken(user: accessTokenType) {
   const refreshToken = jwt.sign(user, JWT_SECRET);
   refreshTokens.push(refreshToken);

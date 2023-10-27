@@ -5,7 +5,7 @@ import { FiEdit } from "react-icons/fi";
 import ImageModal from "../ImageModal/ImageModal";
 import { useAuth } from "../../contexts/AuthContext";
 import { apiClient } from "../../axios";
-import { UserType } from "../../types/userTypes";
+import { UserType } from "../../types/types";
 import { validate } from "../../helpers/validations";
 
 interface IEditDrawer {

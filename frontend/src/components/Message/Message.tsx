@@ -1,5 +1,5 @@
 import React from "react";
-import { ChatType, MessageType, UserType } from "../../types/userTypes";
+import { MessageType, UserType } from "../../types/types";
 import { useAuth } from "../../contexts/AuthContext";
 import {
   ArrowLeftOutlined,
@@ -8,16 +8,13 @@ import {
   MoreOutlined,
   RotateLeftOutlined,
   RotateRightOutlined,
-  SwapLeftOutlined,
   SwapOutlined,
-  SwapRightOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
 } from "@ant-design/icons";
 import { BsFillReplyFill } from "react-icons/bs";
 import { AiFillDelete } from "react-icons/ai";
 import { Space, Image } from "antd";
-import { apiClient } from "../../axios";
 
 interface IMessage {
   index: number;

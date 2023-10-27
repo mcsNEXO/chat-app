@@ -1,5 +1,5 @@
 import levenshtein from "fast-levenshtein";
-import { UserType } from "../types/userTypes";
+import { UserType } from "../types/types";
 
 export const searchUsersByText = (keyWord: string, users: UserType) => {
   let results = [];

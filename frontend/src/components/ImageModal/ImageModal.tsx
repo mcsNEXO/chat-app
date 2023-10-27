@@ -36,13 +36,6 @@ function ImageModal({
           height: "clamp(600px,600px,600px",
         }}
       >
-        {/* {selectedImageUrl ? (
-          <CircleImageCrop
-            imageSrc={selectedImageUrl}
-            selectedImage={selectedImage}
-            imageRef={imageRef.current}
-          />
-        ) : null} */}
         <button
           className="absolute right-4 top-2"
           onClick={() => handleCloseModal()}
@@ -55,17 +48,6 @@ function ImageModal({
           className="w-full hover:cursor-pointer rounded-full"
           onClick={handleOpenInputFile}
         />
-        {/* {selectedImage ? null : (
-          <div className="w-80 h-80 border-dotted border-pink rounded-full overflow-hidden ">
-            <img
-              src={selectedImageUrl ? selectedImageUrl : `uploads/${userImage}`}
-              alt="userImage"
-              ref={imageRef}
-              className="w-full h-full hover:cursor-pointer "
-              onClick={handleOpenInputFile}
-            />
-          </div>
-        )} */}
         <div className="flex justify-around w-full px-2">
           <button
             className="bg-primary px-3 py-1 rounded-md"

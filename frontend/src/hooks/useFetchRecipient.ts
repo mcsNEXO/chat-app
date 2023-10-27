@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { apiClient } from "../axios";
-import { ChatType, UserType } from "../types/userTypes";
+import { ChatType, UserType } from "../types/types";
 
 export const useFetchRecipient = (chat: ChatType) => {
   const [recipientUser, setRecipientUser] = React.useState<UserType>(
