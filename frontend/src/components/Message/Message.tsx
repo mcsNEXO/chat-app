@@ -103,12 +103,18 @@ function Message({
           : `You replied ${recipient?.firstName} ${recipient?.lastName}`}
       </span>
       <div
-        className={`${
+        className={`flex ${
           isDeleted
             ? "bg-transparent border-neutral-500"
             : "bg-neutral-600 border-neutral-600"
-        } flex-col w-fit rounded-lg border order-1 px-2 py-1 z-0 text-neutral-400`}
+        }  w-fit rounded-lg border order-1 px-2 py-1 z-0 text-neutral-400 gap-2`}
       >
+        {message.repliedTo.image ? (
+          <img
+            className="w-10 h-10 rounded-md"
+            src={`message_images/${message.repliedTo.image}`}
+          />
+        ) : null}
         {message?.repliedTo?.text}
       </div>
     </div>

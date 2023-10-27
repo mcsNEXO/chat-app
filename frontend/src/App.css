@@ -18,7 +18,7 @@ a {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   word-break: break-word;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 * {
   box-sizing: border-box;

@@ -1,11 +1,12 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { SignUp } from "./pages/Auth/SignUp";
+import SignUp from "./pages/Auth/SignUp";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MainPath } from "./pages/MainPath/MainPath";
 import { ChatProvider } from "./contexts/ChatContext";
+import { App } from "antd";
 
-function App() {
+function MyPage() {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -29,4 +30,10 @@ function App() {
   );
 }
 
-export default App;
+const Apps = () => (
+  <App className="text-white">
+    <MyPage />
+  </App>
+);
+
+export default Apps;

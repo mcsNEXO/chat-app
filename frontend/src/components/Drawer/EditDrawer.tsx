@@ -1,4 +1,4 @@
-import { Drawer } from "antd";
+import { App, Button, Drawer } from "antd";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
@@ -24,7 +24,8 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
   const [selectedImage, setSelectedImage] = React.useState<File | null>(null);
   const [isOpenModal, setIsOpenModal] = React.useState<boolean>(false);
   const { auth, setAuth } = useAuth();
-
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const { message } = App.useApp();
   const [form, setForm] = React.useState({
     email: {
       value: auth?.email,
@@ -65,6 +66,7 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
   };
 
   const saveImage = async () => {
+    setLoading(true);
     if (!selectedImage) return;
     const formdata = new FormData();
     formdata.append("image", selectedImage);
@@ -85,8 +87,12 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
       setAuth(user);
       setIsOpenModal(false);
       handleCloseModal();
+      if (res.status === 200)
+        message.success("Your profile image has been updated ");
     } catch (error) {
       throw new Error(error as any);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -97,6 +103,7 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
   };
 
   const deleteUserImage = async () => {
+    setLoading(true);
     try {
       const res = await apiClient.sendRequest({
         method: "put",
@@ -105,14 +112,17 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
       const user = res.data as UserType;
       setAuth(user);
       handleCloseModal();
+      if (res.status === 200)
+        message.success("Your profile image has been deleted ");
     } catch (error) {
       throw new Error(error as any);
+    } finally {
+      setLoading(false);
     }
   };
 
   const onChangeInput = (value: string, type: FormTypes) => {
     const { error } = validate(form[type].rules, value, type);
-    console.log(error);
     setForm({
       ...form,
       [type]: {
@@ -124,6 +134,7 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
   };
 
   const updateEmail = async () => {
+    setLoading(true);
     try {
       if (form.email.value === auth?.email) return;
       const errorInput =
@@ -135,10 +146,22 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
         data: { email: form.email.value },
       });
       setAuth(res.data as UserType);
-    } catch (error) {}
+      if (res.status === 200) message.success("Your email has been changed");
+    } catch (err: any) {
+      message.error(
+        `${
+          err?.response?.data?.message
+            ? `Error: ${err?.response?.data?.message}`
+            : "Something went wrong"
+        } `
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const updatePassword = async () => {
+    setLoading(true);
     try {
       const errorInput = Object.values(form).find(
         (x) => x.error !== "" || (x.value === "" && !x.rules.includes("email"))
@@ -167,9 +190,18 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
         },
       });
       setAuth(res.data as UserType);
-    } catch (error) {
-      console.log("e", error);
-      throw new Error(error as any);
+      if (res.status === 200) message.success("Your password has been changed");
+    } catch (err: any) {
+      message.error(
+        `${
+          err?.response?.data?.message
+            ? `Error: ${err?.response?.data?.message}`
+            : "Something went wrong"
+        } `
+      );
+      throw new Error(err as any);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -190,7 +222,11 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
       <div className="overflow-y-scroll custom-scrollbar h-full">
         <div className="h-12 text-lg border-b-2 flex justify-between items-center px-6 py-8 font-semibold">
           Edit your profile
-          <button type="button" className="text-xl" onClick={closeEditDrawer}>
+          <button
+            type="button"
+            className="text-xl transition-colors hover:text-red-600"
+            onClick={closeEditDrawer}
+          >
             <AiOutlineClose />
           </button>
         </div>
@@ -215,12 +251,13 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
               src={`uploads/${auth?.urlProfileImage}`}
               alt="user-img"
             />
-            <button
-              type="button"
-              className=" bg-dark-gray rounded-full h-10 w-10 p-2 absolute bottom-0 right-2 flex justify-center items-center"
+            <Button
+              loading={loading}
+              htmlType="button"
+              className=" bg-dark-gray text-white border-none rounded-full h-10 w-10 p-2 absolute bottom-0 right-2 flex justify-center items-center"
             >
               <FiEdit className="text-xl" />
-            </button>
+            </Button>
           </div>
         </div>
         <div style={{ height: 2 }} className="bg-neutral-700 mt-5"></div>
@@ -250,13 +287,14 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
               ) : null}
             </div>
           </div>
-          <button
-            type="button"
+          <Button
+            loading={loading}
+            htmlType="button"
             onClick={updateEmail}
-            className="text-base bg-primary p-1 rounded-lg w-1/2 m-auto"
+            className="text-base text-white border-none bg-primary p-1 rounded-lg w-1/2 m-auto"
           >
             Save
-          </button>
+          </Button>
         </form>
         <form className="flex flex-col p-2 px-5 gap-8">
           <div className="flex flex-col gap-4">
@@ -339,13 +377,14 @@ function EditDrawer({ isActiveEdit, closeEditDrawer }: IEditDrawer) {
               <div className="text-red-600">{form.confirmPassword.error}</div>
             ) : null}
           </div>
-          <button
-            type="button"
+          <Button
+            loading={loading}
+            htmlType="button"
             onClick={updatePassword}
-            className="text-base bg-primary p-1 rounded-lg w-1/2 m-auto"
+            className="text-base text-white border-none bg-primary p-1 rounded-lg w-1/2 m-auto"
           >
             Save
-          </button>
+          </Button>
         </form>
       </div>
     </Drawer>

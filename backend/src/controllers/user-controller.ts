@@ -9,7 +9,7 @@ import {
 import { JWT_SECRET } from "../../config";
 import { accessTokenType } from "types/accessTokenType";
 import { searchUsersByText } from "../helpers/searchUsersByText";
-import { UserType } from "../types/chatTypes";
+import { UserType, UserTypeWithPass } from "../types/chatTypes";
 import fs from "fs";
 import { get } from "lodash";
 
@@ -266,13 +266,16 @@ export const editPassword = async (
   try {
     const { currentPassword, newPassword, confirmPassword } = req.body;
     if (confirmPassword !== newPassword)
-      return res.status(400).json("Passwords not match");
+      return res.status(400).json({ message: "Passwords not match" });
     if (currentPassword === newPassword)
       return res
         .status(400)
-        .json("Current password is the same what new password");
-    const user = get(req, "identity") as UserType;
-    if (!user) return res.status(400).json("User is not exist");
+        .json({ message: "Current password is the same what new password" });
+    const user = get(req, "identity") as UserTypeWithPass;
+    if (!user) return res.status(400).json({ message: "User is not exist" });
+    const checkPassword = await bcrypt.compare(currentPassword, user?.password);
+    if (!checkPassword)
+      return res.status(400).json({ message: "Current password is not valid" });
     const updatedUser = await UserModel.findByIdAndUpdate(
       user._id,
       {

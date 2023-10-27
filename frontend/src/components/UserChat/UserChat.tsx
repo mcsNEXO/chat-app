@@ -28,9 +28,9 @@ function UserChat({
   const data: any = [];
   return (
     <div
-      className={`flex justify-between mt-1 gap-3 h-20 p-3 rounded-xl ${
+      className={`cursor-pointer flex justify-between mt-1 gap-3 h-20 p-3 rounded-xl ${
         activeChat?._id === chat?._id ? "bg-active-gray" : "bg-dark-gray"
-      }  max-[950px]:justify-center`}
+      } hover:opacity-[75%]  max-[950px]:justify-center`}
       onClick={() => {
         handleActiveChat(chat, recipientUser, activeChat);
       }}

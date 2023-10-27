@@ -312,7 +312,6 @@ function Messages({
               messageInput={messageInput}
               replyMessage={replayMessage}
               recipient={recipient}
-              activeChat={activeChat}
               clearReplyMessage={handleClearReplyMessage}
               handleMessageInput={setMessageInput}
               handleSendMessage={handleSendMessage}

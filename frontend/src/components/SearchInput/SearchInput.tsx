@@ -36,9 +36,11 @@ function SearchInput({
         isActive
           ? "w-0 mr-0 max-[950px]:h-0"
           : `${
-              type === "messages" ? "w-fit" : "w-full max-[950px]:h-auto pl-2"
-            } mr-3`
-      } h-${height}  custom-transition z-1 `}
+              type === "messages"
+                ? "w-fit mr-3"
+                : "w-full max-[950px]:h-auto pl-2"
+            } `
+      } h-${height}  custom-transition z-1 hover:opacity-80`}
     >
       <input
         type="text"
@@ -59,7 +61,7 @@ function SearchInput({
       <div className="absolute inset-y-0 right-0 flex pr-2 gap-1 items-center">
         <button
           type="button"
-          className=" flex items-center rounded-full p-1"
+          className=" flex items-center rounded-full p-1 transition-colors hover:text-blue-600"
           onClick={() =>
             type === "messages" &&
             handleSearchMessages &&
@@ -77,7 +79,7 @@ function SearchInput({
               className="flex items-center"
               onClick={offSearchMessage}
             >
-              <BsXLg />
+              <BsXLg className="font-bold transition-colors hover:text-red-600" />
             </button>
           </>
         ) : null}

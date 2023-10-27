@@ -8,6 +8,7 @@ import {
   UserType,
 } from "../types/userTypes";
 import { Socket, io } from "socket.io-client";
+import { App } from "antd";
 
 interface IChatContext {
   userChats: ChatType[];
@@ -44,6 +45,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { auth } = useAuth();
+  const { message } = App.useApp();
   const [socket, setSocket] = React.useState<Socket>();
   const [userChats, setUserChats] = React.useState<ChatType[]>([]);
   const [chatsLoading, setChatsLoading] = React.useState<boolean>(false);
@@ -219,6 +221,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       });
       const objectData = res.data as ChatType;
       setUserChats((prev) => [...prev, objectData]);
+      if (res.status === 200) message.success("You created new chat!");
     } catch (error) {
       throw new Error(error as any);
     }
@@ -284,6 +287,9 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       });
       const data = res.data as ChatType;
       setDeletedChat(data);
+      if (res.status === 200) {
+        message.success("You deleted a chat");
+      }
     } catch (error) {}
   };
 

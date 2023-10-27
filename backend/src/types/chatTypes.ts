@@ -8,6 +8,17 @@ export type UserType = {
   urlProfileImage: string;
 };
 
+export type UserTypeWithPass = {
+  _id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  createdAt: string;
+  updatedAt: string;
+  urlProfileImage: string;
+};
+
 export type OnlineUsersType = {
   userId: string;
   socketId: string;

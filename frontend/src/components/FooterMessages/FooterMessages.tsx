@@ -1,22 +1,19 @@
 import {
   AudioOutlined,
-  LinkOutlined,
   PictureOutlined,
   SendOutlined,
 } from "@ant-design/icons";
-import React, { InputHTMLAttributes } from "react";
-import { ChatType, MessageType, UserType } from "../../types/userTypes";
+import React from "react";
+import { MessageType, UserType } from "../../types/userTypes";
 import { BsEmojiSmile, BsFillReplyFill, BsXLg } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthContext";
-import { apiClient } from "../../axios";
 import EmojiPicker, { Theme } from "emoji-picker-react";
 
 interface IFooterMessages {
   messageInput: string;
   replyMessage: MessageType | null;
   recipient: UserType | null;
-  activeChat: ChatType;
   handleSendMessage: (
     e: React.FormEvent<HTMLFormElement>,
     image: File | null,
@@ -30,7 +27,6 @@ function FooterMessages({
   messageInput,
   replyMessage,
   recipient,
-  activeChat,
   handleMessageInput,
   clearReplyMessage,
   handleSendMessage,
@@ -77,7 +73,7 @@ function FooterMessages({
         <LinkOutlined className="text-xl" />
       </button> */}
       <button onClick={openInputImage} type="button" className="rounded-full ">
-        <PictureOutlined className="text-xl p-1" />
+        <PictureOutlined className="text-xl p-1 transition-colors hover:text-blue-600" />
         <input
           type="file"
           accept="image/png, image/jpeg"
@@ -103,14 +99,27 @@ function FooterMessages({
                   : `${auth?.firstName} ${auth?.lastName}`}
               </div>
               <div className="text-sm text-neutral-400 font-semibold">
-                {replyMessage.deleted ? "Deleted message" : replyMessage.text}
+                {replyMessage.deleted ? (
+                  "Deleted message"
+                ) : (
+                  <div className="flex gap-2 items-center">
+                    {replyMessage.image && (
+                      <img
+                        className="w-12 h-12 rounded-md"
+                        srcSet={`message_images/${replyMessage.image}`}
+                        src="reply-image"
+                      />
+                    )}
+                    {replyMessage.text}
+                  </div>
+                )}
               </div>
             </div>
             <button
               className="justify-self-end w-6 text-2xl rounded-full"
               onClick={clearReplyMessage}
             >
-              <BsXLg />
+              <BsXLg className="transition-colors hover:text-red-600" />
             </button>
           </div>
         ) : null}
@@ -142,12 +151,12 @@ function FooterMessages({
           style={{ bottom: 6 }}
           className="absolute right-2 flex items-center justify-center rounded-full p-1"
         >
-          <AudioOutlined className="text-lg" />
+          <AudioOutlined className="text-lg transition-colors hover:text-blue-600" />
         </button>
         <div
           onPointerEnter={() => setIsActiveEmoji(true)}
           onPointerLeave={() => setIsActiveEmoji(false)}
-          className="absolute left-2"
+          className="absolute left-2 transition-colors hover:text-blue-600"
           style={{ bottom: 10 }}
         >
           <div className="relative">
@@ -165,12 +174,12 @@ function FooterMessages({
               </div>
             ) : null}
           </div>
-          <BsEmojiSmile className="text-xl cursor-pointer" />
+          <BsEmojiSmile className="text-xl cursor-pointer " />
         </div>
       </div>
 
       <button type="submit" className="rounded-full">
-        <SendOutlined className="text-xl p-1" />
+        <SendOutlined className="text-xl p-1 transition-colors hover:text-blue-600" />
       </button>
     </form>
   );

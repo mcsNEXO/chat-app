@@ -6,10 +6,12 @@ import { useState } from "react";
 import { apiClient } from "../../axios";
 import { UserContext, useAuth } from "../../contexts/AuthContext";
 import "../../App.css";
+import { App } from "antd";
 
 export const Main = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { message, notification, modal } = App.useApp();
 
   const { setAuth } = useAuth();
 
@@ -26,9 +28,18 @@ export const Main = () => {
       });
       const data: any = res.data;
       if (res.status === 200 && data.success === true) {
+        message.success("You logged in");
         setAuth(data.data as UserContext);
       }
-    } catch (err) {}
+    } catch (err: any) {
+      message.error(
+        `${
+          err?.response?.data?.message
+            ? `Error: ${err?.response?.data?.message}`
+            : "Something went wrong"
+        } `
+      );
+    }
   };
 
   return (

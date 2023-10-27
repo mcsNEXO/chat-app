@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./SignUp.scss";
 import { validate } from "../../helpers/validations";
 import { apiClient } from "../../axios";
+import { App } from "antd";
+import { useNavigate } from "react-router-dom";
 
 interface FormField {
   value: string;
@@ -17,7 +19,8 @@ interface FormFields {
   lastName: FormField;
 }
 type FormFieldType = keyof FormFields;
-export const SignUp = () => {
+const SignUp = () => {
+  const { message, notification, modal } = App.useApp();
   const [error, setError] = useState<string>("");
   const [form, setForm] = useState<FormFields>({
     email: {
@@ -46,10 +49,9 @@ export const SignUp = () => {
       rules: ["required"],
     },
   });
-
+  const navigate = useNavigate();
   const onChangeInput = (value: string, type: FormFieldType) => {
     const { error } = validate(form[type].rules, value, type);
-    console.log(error);
     setForm({
       ...form,
       [type]: {
@@ -74,15 +76,24 @@ export const SignUp = () => {
           lastName: form.lastName.value,
         },
       });
-    } catch (err) {
-      console.log(err);
+      if (res.status === 200) {
+        message.success("You was registered", 1);
+        setTimeout(() => navigate("/"), 1000);
+      }
+    } catch (err: any) {
+      message.error(
+        `Something went wrong. ${
+          err?.response?.data?.message &&
+          `Error: ${err?.response?.data?.message}`
+        }`
+      );
     }
   };
 
   return (
     <div className="container-sign-up">
       <div className="box">
-        <div className="title">Sign up</div>
+        <div className="title text-white">Sign up</div>
         <form>
           <input
             type="email"
@@ -133,3 +144,5 @@ export const SignUp = () => {
     </div>
   );
 };
+
+export default SignUp;

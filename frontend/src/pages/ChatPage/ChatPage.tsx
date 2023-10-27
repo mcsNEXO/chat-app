@@ -98,8 +98,10 @@ export const ChatPage = () => {
           </div>
         ) : null}
         <section
-          className={`flex transition-all flex-col bg-neutral-900 gap-6 z-20 h-full min-w-[256px] max-w-[20vw] w-full  max-[950px]:${
-            isActive ? "min-w-[200px]" : "min-w-[100px]"
+          className={`flex transition-all flex-col bg-neutral-900 gap-6 z-20 h-full min-w-[256px] max-w-[20vw] w-full ${
+            isActive
+              ? " max-[950px]:min-w-[220px]"
+              : " max-[950px]:min-w-[100px]"
           } ${isActive ? " max-[950px]:absolute" : ""} w-24`}
         >
           <div className="flex justify-between items-center h-9 max-[950px]:flex-col max-[950px]:h-20 max-[950px]:gap-1">
@@ -168,13 +170,15 @@ export const ChatPage = () => {
                   className="flex bg-blue-700 h-7 rounded-xl justify-center items-center text-base gap-2 cursor-pointer hover:bg-blue-800"
                 >
                   <IoMdPersonAdd />{" "}
-                  <span className="max-[950px]:hidden ">Add new friend</span>
+                  <span className="truncate max-[950px]:hidden ">
+                    Add new friend
+                  </span>
                 </button>
               </div>
               <div
                 className={`custom-transition ${
                   isActive ? "w-full px-2" : "w-0 px-0"
-                } overflow-hidden`}
+                } overflow-hidden overflow-y-scroll custom-scrollbar`}
               >
                 <button
                   type="button"
@@ -184,7 +188,7 @@ export const ChatPage = () => {
                   <div className="flex items-center ">
                     <AiOutlineArrowLeft />
                   </div>
-                  <div className="flex w-full  items-center gap-1 justify-center">
+                  <div className="flex w-full truncate items-center gap-1 justify-center">
                     Back to chats
                   </div>
                 </button>

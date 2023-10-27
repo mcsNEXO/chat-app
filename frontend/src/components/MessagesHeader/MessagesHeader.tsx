@@ -64,7 +64,7 @@ function MessagesHeader({
         <button
           onClick={scrollUp}
           disabled={searchedMessagesLength > 0 ? false : true}
-          className="bg-neutral-700 w-7 h-7 rounded-full flex items-center justify-center pb-1 disabled:opacity-50"
+          className="bg-neutral-700 w-7 h-7 rounded-full flex items-center justify-center pb-1 disabled:opacity-50 hover:disabled:text-neutral-200 transition-colors hover:text-gray-300 hover:bg-neutral-800"
         >
           <UpOutlined className="text-sm" />
         </button>
@@ -82,7 +82,7 @@ function MessagesHeader({
         <button
           onClick={scrollDown}
           disabled={searchedMessagesLength > 0 ? false : true}
-          className="bg-neutral-700 w-7 h-7 rounded-full flex items-center justify-center disabled:opacity-50"
+          className="bg-neutral-700 w-7 h-7 rounded-full flex items-center justify-center disabled:opacity-50 hover:disabled:text-neutral-200 transition-colors hover:text-gray-300 hover:bg-neutral-800"
         >
           <DownOutlined className="text-sm" />
         </button>
@@ -92,7 +92,7 @@ function MessagesHeader({
 
   return (
     <>
-      <div className="flex flex-col border border-x-0 border-t-0 border-neutral-600">
+      <div className="flex flex-col border border-x-0 border-t-0 border-neutral-600 max-[950px]:pb-2">
         <div className="flex justify-between relative  h-20 pb-4 max-[950px]:">
           <div className="flex items-center gap-6 h-full">
             <img
@@ -109,10 +109,13 @@ function MessagesHeader({
 
             <div className="flex gap-4">
               <button className="flex items-center rounded-full">
-                <PhoneOutlined rotate={90} className="text-2xl p-1" />
+                <PhoneOutlined
+                  rotate={90}
+                  className="text-2xl p-1 transition-colors hover:text-blue-600"
+                />
               </button>
               <button
-                className="flex items-center rounded-full"
+                className="flex items-center rounded-full transition-colors hover:text-blue-600"
                 onClick={handleActiveOption}
               >
                 <MoreOutlined className="text-2xl" />

@@ -52,7 +52,11 @@ function DrawerComponent({ isActiveDrawer, closeDrawer }: IDrawerComponent) {
           >
             Chatiffy
           </div>
-          <button onClick={closeDrawer} type="button" className="text-xl">
+          <button
+            onClick={closeDrawer}
+            type="button"
+            className="text-xl transition-colors hover:text-red-600"
+          >
             <AiOutlineClose />
           </button>
         </div>
