@@ -11,27 +11,28 @@ To run the project, follow these steps:
    $git clone <repository_address>
 
 2. Create an .env file in the backend directory and set the following values:
-  PORT=
-  DATABASE=<database_address>
-  JWT_SECRET=<jwt_secret_key>
+   ```bash
+     PORT=
+     DATABASE=<database_address>
+     JWT_SECRET=<jwt_secret_key>
   
-3. Go to the backend directory:
+4. Go to the backend directory:
    ```bash
    $cd ../backend
-4. Install dependencies using Yarn:
+5. Install dependencies using Yarn:
    ```bash
    $yarn
-5. Start server express:
+6. Start server express:
    ```bash
    $yarn start
    
-6. Go to the frontend directory:
+7. Go to the frontend directory:
    ```bash
    $cd frontend;
-7. Install dependencies using Yarn:
+8. Install dependencies using Yarn:
     ```bash
     yarn
-8. Launch React apps:
+9. Launch React apps:
    ```bash
    yarn run dev
 
