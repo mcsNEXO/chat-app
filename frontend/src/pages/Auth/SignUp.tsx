@@ -3,7 +3,8 @@ import "./SignUp.scss";
 import { validate } from "../../helpers/validations";
 import { apiClient } from "../../axios";
 import { App } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 interface FormField {
   value: string;
@@ -92,6 +93,12 @@ const SignUp = () => {
 
   return (
     <div className="container-sign-up">
+      <Link
+        to="/"
+        className="absolute flex justify-center items-center top-3 left-5 bg-slate-500 w-10 h-10 rounded-full text-slate-300 text-lg hover:text-blue-600 transition-colors hover:bg-neutral-700"
+      >
+        <ArrowLeftOutlined />
+      </Link>
       <div className="box">
         <div className="title text-white">Sign up</div>
         <form>
@@ -139,6 +146,15 @@ const SignUp = () => {
           <button type="button" onClick={registerUser}>
             Sign up
           </button>
+          <span className="text-center mt-1">
+            You have account?{" "}
+            <Link
+              to={"/"}
+              className="underline text-gray-300 hover:text-blue-600 cursor-pointer transition-colors"
+            >
+              Log in
+            </Link>
+          </span>
         </form>
       </div>
     </div>

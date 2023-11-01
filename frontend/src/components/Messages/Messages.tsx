@@ -166,8 +166,8 @@ function Messages({
   React.useEffect(() => {
     if (scroll.current && page === 1) {
       if (messages) {
-        scroll.current.scroll({
-          top: scroll.current.scrollHeight,
+        scroll?.current?.scroll({
+          top: scroll?.current?.scrollHeight,
           behavior: "instant",
         });
       } else {

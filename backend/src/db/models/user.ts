@@ -19,19 +19,19 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema(
       type: String,
       unique: true,
       lowercase: true,
-      required: true,
+      required: [true, "Email is required"],
     },
     password: {
       type: String,
-      required: true,
+      required: [true, "Password is required"],
     },
     firstName: {
       type: String,
-      required: true,
+      required: [true, "First name is required"],
     },
     lastName: {
       type: String,
-      required: true,
+      required: [true, "Last name is required"],
     },
     urlProfileImage: {
       type: String,

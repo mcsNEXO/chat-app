@@ -1,6 +1,5 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SignUp from "./pages/Auth/SignUp";
 import { AuthProvider } from "./contexts/AuthContext";
 import { IsLoggedIn, MainPath } from "./pages/MainPath/MainPath";
 import { ChatProvider } from "./contexts/ChatContext";

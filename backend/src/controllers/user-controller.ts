@@ -15,10 +15,8 @@ import { get } from "lodash";
 
 export const register = async (req: express.Request, res: express.Response) => {
   try {
-    const { email, password, firstName, lastName } = req.body as Record<
-      string,
-      string
-    >;
+    const { email, password, confirmPassword, firstName, lastName } =
+      req.body as Record<string, string>;
     if (!email || !password || !firstName || !lastName) {
       return res.status(400).json({
         success: false,
@@ -31,6 +29,15 @@ export const register = async (req: express.Request, res: express.Response) => {
       return res
         .status(409)
         .json({ success: false, message: "User with this email exists!" });
+
+    if (confirmPassword !== password) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Password and confirm password aren't match",
+        });
+    }
 
     const newUser = new UserModel({
       email: email,
