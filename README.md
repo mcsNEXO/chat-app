@@ -14,20 +14,26 @@ To run the project, follow these steps:
   PORT=
   DATABASE=<database_address>
   JWT_SECRET=<jwt_secret_key>
-
-3.Go to the backend directory:
-  $cd../backend
-  Install dependencies using Yarn:
+  
+3. Go to the backend directory:
+   ```bash
+   $cd ../backend
+4. Install dependencies using Yarn:
+   ```bash
+   $yarn
+5. Start server express:
+   ```bash
+   $yarn start
+   
+6. Go to the frontend directory:
+   ```bash
+   $cd frontend;
+7. Install dependencies using Yarn:
+    ```bash
     yarn
-  Start server express:
-    yarn start
-    
-4. Go to the frontend directory:
-    $cd frontend;
-  Install dependencies using Yarn:
-     yarn
-   Launch React apps:
-     yarn run dev
+8. Launch React apps:
+   ```bash
+   yarn run dev
 
   
 
