@@ -35,9 +35,3 @@ To run the project, follow these steps:
 9. Launch React apps:
    ```bash
    yarn run dev
-
-  
-
-
-
-
